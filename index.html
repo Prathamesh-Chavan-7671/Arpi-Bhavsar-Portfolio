@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout concept: editorial scroll. Hero with a live molecular network and a rotating helix, a scrubbed marquee,
-   word-by-word reveal, counted numbers, a pinned horizontal run through three programmes, a drawn timeline. */
+   word-by-word reveal, counted numbers, a pinned horizontal overview of three projects followed by full case studies
+   with a sticky aside, a writing section, and a drawn timeline. */
 :root {
   --bg: #EDF1F6;
   --bg-2: #FFFFFF;
@@ -45,9 +46,10 @@ a { color: inherit; }
 section { scroll-margin-top: 76px; }
 .wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.02; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
 h2 { font-size: clamp(2.1rem, 5.2vw, 4rem); }
 p { margin: 0; }
+.pill { font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; border: 1px solid var(--line); padding: .35rem .8rem; border-radius: 999px; color: var(--muted); background: var(--bg-2); }
 
 /* header */
 .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 60; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
@@ -60,21 +62,20 @@ p { margin: 0; }
 .nav .cta { color: var(--accent-ink); background: var(--accent); padding: .45rem 1rem; border-radius: 999px; font-weight: 600; }
 .nav .cta:hover { color: var(--accent-ink); }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
-@media (max-width: 760px) { .nav a:not(.cta) { display: none; } }
+@media (max-width: 860px) { .nav a:not(.cta) { display: none; } }
 
 /* hero */
 .hero { position: relative; overflow: hidden; padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3rem, 6vw, 5rem); }
 #net { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 2rem; align-items: center; }
-.hero h1 { font-size: clamp(2.7rem, 10.5vw, 7rem); font-weight: 800; letter-spacing: -.035em; line-height: .98; margin-block: 1rem 1.6rem; }
+.hero h1 { font-size: clamp(3.2rem, 13vw, 8.4rem); font-weight: 800; letter-spacing: -.04em; line-height: .94; margin-block: 1rem 1.4rem; }
 .hero h1 .line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
 .hero h1 .wi { display: inline-block; }
 .hero h1 .line:nth-child(2) .wi { color: var(--accent-tx); }
-.hero h1 .line:nth-child(3) .wi { color: var(--pop); }
-.hero .lead { max-width: 34rem; color: var(--muted); font-size: 1.15rem; }
-.hero .lead strong { color: var(--fg); font-weight: 600; }
-.hero .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-.btn { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-weight: 600; padding: .85rem 1.4rem; border-radius: 999px; border: 1.5px solid var(--fg); background: transparent; color: var(--fg); font: inherit; font-weight: 600; cursor: pointer; transition: background .2s, color .2s; }
+.role-sub { font-family: var(--display); font-weight: 600; font-size: clamp(1.3rem, 2.7vw, 2rem); letter-spacing: -.015em; line-height: 1.15; max-width: 22em; text-wrap: balance; }
+.hero .lead { max-width: 36rem; color: var(--muted); font-size: 1.15rem; margin-top: 1rem; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+.btn { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; padding: .8rem 1.3rem; border-radius: 999px; border: 1.5px solid var(--fg); background: transparent; color: var(--fg); font: inherit; font-weight: 600; cursor: pointer; transition: background .2s, color .2s; }
 .btn:hover { background: var(--fg); color: var(--bg); }
 .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .btn.solid:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
@@ -85,7 +86,7 @@ p { margin: 0; }
 .glyph { position: absolute; pointer-events: none; color: var(--accent-tx); }
 .glyph svg { display: block; width: 100%; height: auto; overflow: visible; }
 .g1 { width: 96px; right: 30%; top: 8%; }
-.g2 { width: 74px; left: 46%; bottom: 6%; color: var(--pop); }
+.g2 { width: 74px; left: 52%; bottom: 6%; color: var(--pop); }
 .g3 { width: 58px; right: 4%; bottom: 14%; color: var(--fg); opacity: .6; }
 @media (max-width: 800px) {
   .hero .wrap { grid-template-columns: 1fr; }
@@ -105,9 +106,9 @@ p { margin: 0; }
 /* about */
 .about { padding-block: clamp(4rem, 9vw, 8rem); }
 .about .wrap { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 2rem; }
-.about .reveal { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 3.6vw, 2.8rem); line-height: 1.18; letter-spacing: -.02em; max-width: 24em; }
+.about .reveal { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 3.3vw, 2.5rem); line-height: 1.2; letter-spacing: -.02em; max-width: 26em; }
+.about .reveal + .reveal { margin-top: 1.6rem; }
 .about .facts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
-.pill { font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; border: 1px solid var(--line); padding: .35rem .8rem; border-radius: 999px; color: var(--muted); background: var(--bg-2); }
 @media (max-width: 760px) { .about .wrap { grid-template-columns: 1fr; } }
 
 /* numbers */
@@ -121,18 +122,16 @@ p { margin: 0; }
 .stat p strong { color: var(--bg); font-weight: 600; display: block; font-size: 1.15rem; }
 @media (max-width: 640px) { .stat { grid-template-columns: 1fr; gap: .4rem; } }
 
-/* programmes */
+/* projects overview (pinned horizontal run) */
 .programs-head { padding-block: clamp(4rem, 8vw, 7rem) 2rem; }
 .programs-head h2 { margin-top: .8rem; max-width: 13em; }
-.programs-head p { color: var(--muted); max-width: 34rem; margin-top: 1rem; }
+.programs-head .focus { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
 .hscroll { overflow: hidden; padding-bottom: clamp(3rem, 6vw, 5rem); }
 .track { display: flex; flex-direction: column; gap: 1.5rem; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); will-change: transform; }
 .panel { background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: clamp(1.2rem, 3vw, 2.2rem); display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
 .panel h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin-block: .6rem 1rem; }
-.panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .7rem; color: var(--muted); font-size: .98rem; }
-.panel li { padding-left: 1.2rem; position: relative; }
-.panel li::before { content: ""; position: absolute; left: 0; top: .62em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); }
-.panel li strong { color: var(--fg); font-weight: 600; }
+.panel .sum { color: var(--muted); max-width: 30em; }
+.more { display: inline-block; margin-top: 1.2rem; font-weight: 600; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--accent); }
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
 .art { align-self: center; border-radius: 18px; background: var(--bg); border: 1px solid var(--line); padding: .6rem; }
 .art svg { width: 100%; height: auto; display: block; overflow: visible; }
@@ -142,6 +141,46 @@ p { margin: 0; }
   .panel { width: min(900px, 78vw); grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; flex: none; }
   .panel .art { order: 2; }
 }
+
+/* case studies */
+.case { padding-block: clamp(3rem, 6vw, 5.5rem); border-top: 1px solid var(--line); }
+.case .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+.bignum { font-family: var(--display); font-weight: 800; font-size: clamp(4.5rem, 12vw, 9rem); line-height: .85; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 2px var(--accent-tx); }
+.aside .when { margin-top: 1rem; color: var(--fg); font-weight: 600; }
+.aside .where { color: var(--muted); }
+.aside .art { margin-top: 1.4rem; max-width: 340px; }
+.case h3 { font-size: clamp(1.8rem, 3.6vw, 2.9rem); margin-bottom: .5rem; max-width: 18em; }
+.case .role { color: var(--muted); }
+.block { margin-top: 2.2rem; }
+.block > .mono { display: block; margin-bottom: .7rem; color: var(--accent-tx); }
+.block p { max-width: 46rem; }
+.contrib { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: .95rem; max-width: 46rem; }
+.contrib li { padding-left: 1.3rem; position: relative; color: var(--muted); }
+.contrib li::before { content: ""; position: absolute; left: 0; top: .66em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); }
+.contrib li strong { color: var(--fg); font-weight: 600; }
+.outputs { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.1rem; }
+.outputs-label { margin-top: 1.4rem; display: block; }
+@media (min-width: 900px) {
+  .case .wrap { grid-template-columns: 340px minmax(0, 1fr); gap: 4.5rem; }
+  .aside { position: sticky; top: 96px; align-self: start; }
+}
+
+/* writing */
+.writing { padding-block: clamp(4rem, 8vw, 7rem); background: var(--bg-2); border-block: 1px solid var(--line); }
+.writing h2 { margin-block: .8rem 1rem; max-width: 14em; }
+.writing .intro { color: var(--muted); max-width: 36rem; margin-bottom: 2.4rem; }
+.wgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 1.5rem; }
+.wcat { border: 1px solid var(--line); border-radius: 20px; padding: 1.4rem; background: var(--bg); display: grid; gap: 1.4rem; align-content: start; min-width: 0; }
+.wcat > h3 { font-size: 1.6rem; display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.entry { display: grid; gap: .65rem; min-width: 0; }
+.snap { aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; background-color: var(--bg-2); background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, transparent) 0 10px, transparent 10px 20px); }
+.snap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.entry.empty .snap { border-style: dashed; background-image: none; }
+.entry h4 { font-size: 1.2rem; line-height: 1.15; }
+.entry .src { color: var(--muted); font-size: .92rem; }
+.entry .sum { color: var(--muted); font-size: .97rem; max-width: 36rem; }
+.entry .lnk { font-weight: 600; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--accent); width: fit-content; }
+.entry .tbd { font-family: var(--mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
 /* path */
 .path { padding-block: clamp(4rem, 8vw, 7rem); }
@@ -154,6 +193,7 @@ p { margin: 0; }
 .tl.on::before { background: var(--accent); border-color: var(--accent); transform: scale(1.15); }
 .tl h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); margin-block: .5rem .3rem; }
 .tl .org { color: var(--muted); margin-bottom: .9rem; }
+.tl .focusline { color: var(--accent-tx); margin-bottom: .9rem; text-transform: none; letter-spacing: .02em; font-size: .8rem; }
 .tl ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; max-width: 46rem; color: var(--muted); font-size: .98rem; }
 .tl li { padding-left: 1.1rem; position: relative; }
 .tl li::before { content: ""; position: absolute; left: 0; top: .7em; width: .45rem; height: 1.5px; background: var(--accent); }
@@ -180,8 +220,9 @@ p { margin: 0; }
 /* contact */
 .contact { padding-block: clamp(4rem, 9vw, 8rem); background: var(--accent); color: var(--accent-ink); position: relative; overflow: hidden; }
 .contact .mono { color: color-mix(in srgb, var(--accent-ink) 70%, transparent); }
-.contact h2 { font-size: clamp(2.6rem, 8.5vw, 6.4rem); font-weight: 800; letter-spacing: -.035em; margin-block: 1rem 2.2rem; max-width: 11em; }
-.details { display: grid; gap: .9rem; max-width: 36rem; }
+.contact h2 { font-size: clamp(2.6rem, 8.5vw, 6.4rem); font-weight: 800; letter-spacing: -.035em; margin-block: 1rem 1.2rem; max-width: 11em; }
+.contact .open { max-width: 34rem; font-size: 1.15rem; margin-bottom: 2.2rem; }
+.details { display: grid; gap: .9rem; max-width: 38rem; position: relative; }
 .detail { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: .9rem; border-top: 1px solid color-mix(in srgb, var(--accent-ink) 30%, transparent); }
 .detail span:first-child { font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; opacity: .75; min-width: 5.5rem; }
 .detail .val { font-weight: 500; font-size: 1.1rem; overflow-wrap: anywhere; flex: 1 1 12rem; }
@@ -203,7 +244,7 @@ p { margin: 0; }
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Arpi Bhavsar, back to top"><span class="mark">AB</span><span>Arpi Bhavsar</span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#about">About</a><a href="#numbers">Numbers</a><a href="#programs">Programmes</a><a href="#path">Path</a><a href="#skills">Skills</a>
+      <a href="#about">About</a><a href="#numbers">Numbers</a><a href="#programs">Projects</a><a href="#writing">Writing</a><a href="#path">Path</a><a href="#skills">Skills</a>
       <a class="cta mag" href="#contact">Contact</a>
     </nav>
   </div>
@@ -224,18 +265,20 @@ p { margin: 0; }
   </div>
   <div class="wrap">
     <div>
-      <p class="mono">Program &amp; Outreach Lead · Mumbai Biocluster, ICT Mumbai</p>
-      <h1 aria-label="Programmes. Science. People.">
-        <span class="line"><span class="wi">Programmes.</span></span>
-        <span class="line"><span class="wi">Science.</span></span>
-        <span class="line"><span class="wi">People.</span></span>
+      <p class="mono">Mumbai Biocluster, ICT Mumbai · Navi Mumbai</p>
+      <h1 aria-label="Arpi Bhavsar">
+        <span class="line"><span class="wi">Arpi</span></span>
+        <span class="line"><span class="wi">Bhavsar</span></span>
       </h1>
-      <p class="lead"><strong>Arpi Bhavsar</strong> leads conferences, workshops and ecosystem initiatives from concept to delivery, and connects India's innovation ecosystem with global partners. M.Sc. in Biotechnology. Based in Navi Mumbai.</p>
+      <p class="role-sub">Scientific Programs, Communications &amp; Outreach Lead</p>
+      <p class="lead">I'm a biotechnology professional working at the intersection of scientific programme development, science communication, and publishing.</p>
       <div class="actions">
-        <a class="btn solid mag" href="#programs">See the programmes <span aria-hidden="true">→</span></a>
-        <a class="btn mag" href="#contact">Get in touch <span aria-hidden="true">→</span></a>
+        <a class="btn solid mag" href="#writing">My work <span aria-hidden="true">→</span></a>
+        <a class="btn mag" href="Arpi_Bhavsar_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn mag" href="https://linkedin.com/in/arpi-bhavsar-64a8b1212" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn mag" href="mailto:arpibhavsar12@gmail.com">Email</a>
       </div>
-      <div class="scroll-cue mono"><i></i>Scroll. Three programmes ahead.</div>
+      <div class="scroll-cue mono"><i></i>Scroll. Three projects ahead.</div>
     </div>
     <div class="helix-box" data-speed="0.25" aria-hidden="true"><svg id="helix" viewBox="0 0 220 560"></svg></div>
   </div>
@@ -250,7 +293,8 @@ p { margin: 0; }
   <div class="wrap">
     <p class="mono">About</p>
     <div>
-      <p class="reveal" id="reveal">Programme manager with a biotechnology background who leads scientific programmes, conferences and training initiatives end to end. She builds lasting relationships with senior leaders across pharma, CROs, CDMOs, regulators and academia, and turns complex science into clear content for very different audiences.</p>
+      <p class="reveal">At Mumbai Biocluster, ICT Mumbai, I work on translating emerging scientific developments into meaningful conversations, knowledge resources, and industry–academia engagement. From shaping conference agendas and bringing the right experts together to developing technical whitepapers, I enjoy making complex science accessible without losing its depth.</p>
+      <p class="reveal">My journey began in the laboratory, working on monoclonal antibodies against infectious disease targets. Today, I bring that scientific foundation into the way I research, write, and build scientific programmes.</p>
       <div class="facts">
         <span class="pill">Agenda curation</span><span class="pill">Speaker engagement</span><span class="pill">Session design</span><span class="pill">Whitepapers</span><span class="pill">Science storytelling</span>
       </div>
@@ -262,68 +306,196 @@ p { margin: 0; }
   <div class="wrap">
     <p class="mono">By the numbers</p>
     <h2>What the 2026 programmes looked like on paper.</h2>
-    <div class="stat"><b><span data-count="3" data-pad="2">03</span></b><p><strong>Flagship programmes in 2026</strong>A symposium, a hands-on workshop and a conference, each planned and run with different stakeholders.</p></div>
-    <div class="stat"><b><span data-count="4" data-pad="2">04</span></b><p><strong>Parallel tracks</strong>Agenda development for 3DCC × Biologics 2026, running across five conference halls.</p></div>
+    <div class="stat"><b><span data-count="3" data-pad="2">03</span></b><p><strong>Flagship projects in 2026</strong>A symposium, a hands-on workshop and a conference, each planned and run with different stakeholders.</p></div>
+    <div class="stat"><b><span data-count="4" data-pad="2">04</span></b><p><strong>Parallel tracks</strong>Programme requirements coordinated for 3DCC × Biologics 2026, running across five conference halls.</p></div>
     <div class="stat"><b><span data-count="5" data-pad="2">05</span></b><p><strong>Conference halls</strong>Speakers, moderators, jury members and organising teams coordinated across all of them.</p></div>
-    <div class="stat"><b><span data-count="4" data-pad="2">04</span><em> days</em></b><p><strong>Hands-on training</strong>Lectures, demonstrations and lab practice on 3D cell culture, 3D bioprinting and organ-on-chip.</p></div>
+    <div class="stat"><b><span data-count="4" data-pad="2">04</span><em> days</em></b><p><strong>Hands-on training</strong>Lectures, demonstrations and practical sessions on 3D cell culture, 3D bioprinting and organ-on-chip.</p></div>
     <div class="stat"><b><span data-count="2" data-pad="2">02</span><em> days</em></b><p><strong>PCG 2026 symposium</strong>Plenaries, technical panels, leadership roundtables and workshops on peptides and complex generics.</p></div>
     <div class="stat"><b><span data-count="8.44">8.44</span><em> /10</em></b><p><strong>M.Sc. Biotechnology CGPA</strong>Guru Nanak Khalsa College, Mumbai, 2022.</p></div>
   </div>
 </section>
 
-<section id="programs" aria-label="Programmes">
+<section id="programs" aria-label="Projects and impact">
   <div class="wrap programs-head">
-    <p class="mono">Flagship programmes · 2026</p>
-    <h2>Three programmes, planned from a blank page.</h2>
-    <p>Each one started as a concept and was shaped into an agenda, a speaker list and a day-by-day plan.</p>
+    <p class="mono">Projects &amp; impact</p>
+    <h2>Three projects, planned from a blank page.</h2>
+    <div class="focus">
+      <span class="pill">Scientific Programme Development</span><span class="pill">Industry Engagement</span><span class="pill">Conference &amp; Workshop Management</span><span class="pill">Technical Publishing</span>
+    </div>
   </div>
   <div class="hscroll" id="hscroll">
     <div class="track" id="track">
 
       <article class="panel">
         <div>
-          <p class="mono">2–5 June 2026 · ICT Mumbai</p>
-          <h3>Hands-on Training Workshop on Alternatives to Animal Models</h3>
-          <ul>
-            <li><strong>Led</strong> planning, coordination and execution of a four-day programme for academic and industry participants.</li>
-            <li><strong>Covered</strong> 3D cell culture, 3D bioprinting and organ-on-chip technologies.</li>
-            <li><strong>Designed</strong> the programme flow around expert-led lectures, technical demonstrations and hands-on sessions.</li>
-            <li><strong>Managed</strong> participant communications, registrations and on-ground coordination across all four days.</li>
-          </ul>
-          <div class="tags"><span class="pill">3D cell culture</span><span class="pill">Organ-on-chip</span><span class="pill">Training</span></div>
-        </div>
-        <div class="art"><svg data-art="spheroid" role="img" aria-label="Cluster of cells forming a spheroid"></svg></div>
-      </article>
-
-      <article class="panel">
-        <div>
           <p class="mono">28–29 September 2026 · Aurika, Mumbai</p>
           <h3>PCG 2026: Peptides &amp; Complex Generics Symposium</h3>
-          <ul>
-            <li><strong>Conceptualised</strong> the scientific programme for pharmaceutical leaders, regulatory experts, academicians and technology specialists.</li>
-            <li><strong>Structured</strong> plenaries, technical panels, leadership roundtables and workshops across peptides, oligonucleotides, complex generics, formulation, drug delivery and manufacturing.</li>
-            <li><strong>Ran</strong> speaker engagement end to end: identification, outreach, invitations, confirmations and follow-ups.</li>
-            <li><strong>Wrote</strong> session briefs, thematic frameworks and moderator notes, and is contributing to a series of technical whitepapers.</li>
-          </ul>
+          <p class="sum">An industry-focused symposium on the evolving landscape of peptides and complex generics, bringing together pharmaceutical leaders, regulators, academicians and technology specialists.</p>
           <div class="tags"><span class="pill">Peptide therapeutics</span><span class="pill">Complex generics</span><span class="pill">Whitepapers</span></div>
+          <a class="more" href="#pcg">Read the case study ↓</a>
         </div>
         <div class="art"><svg data-art="peptide" role="img" aria-label="A chain of amino acid beads"></svg></div>
       </article>
 
       <article class="panel">
         <div>
-          <p class="mono">2026 · Organising Committee</p>
+          <p class="mono">2–5 June 2026 · ICT Mumbai</p>
+          <h3>Hands-on Training Workshop on Alternatives to Animal Models</h3>
+          <p class="sum">A four-day technical training programme giving academic and industry participants practical exposure to 3D cell culture, 3D bioprinting and organ-on-chip technologies.</p>
+          <div class="tags"><span class="pill">3D cell culture</span><span class="pill">Organ-on-chip</span><span class="pill">Training</span></div>
+          <a class="more" href="#workshop">Read the case study ↓</a>
+        </div>
+        <div class="art"><svg data-art="spheroid" role="img" aria-label="Cluster of cells forming a spheroid"></svg></div>
+      </article>
+
+      <article class="panel">
+        <div>
+          <p class="mono">21–23 January 2026 · Novotel, Goa</p>
           <h3>3DCC × Biologics 2026 Conference</h3>
-          <ul>
-            <li><strong>Built</strong> the scientific agenda across four parallel tracks and five conference halls.</li>
-            <li><strong>Worked with</strong> speakers, moderators, jury members and organising teams, and invited national and international experts.</li>
-            <li><strong>Coordinated</strong> abstract screening and poster evaluation, including the jury and the Best Poster Awards.</li>
-            <li><strong>Supported</strong> website content, programme announcements and outreach.</li>
-          </ul>
-          <div class="tags"><span class="pill">Multi-track agenda</span><span class="pill">Abstract review</span><span class="pill">Outreach</span></div>
+          <p class="sum">A multidisciplinary conference at the intersection of 3D cell culture, biologics and emerging biotechnology platforms, run across four parallel tracks and five conference halls.</p>
+          <div class="tags"><span class="pill">Multi-track agenda</span><span class="pill">Abstract review</span><span class="pill">Poster jury</span></div>
+          <a class="more" href="#conference">Read the case study ↓</a>
         </div>
         <div class="art"><svg data-art="grid" role="img" aria-label="Four tracks across five halls"></svg></div>
       </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="case" id="pcg" aria-label="PCG 2026 case study">
+  <div class="wrap">
+    <div class="aside">
+      <div class="bignum" aria-hidden="true">01</div>
+      <p class="when">28–29 September 2026</p>
+      <p class="where">Aurika, Mumbai</p>
+      <div class="art"><svg data-art="peptide" role="img" aria-label="A chain of amino acid beads"></svg></div>
+    </div>
+    <div>
+      <p class="mono">Case study</p>
+      <h3>PCG 2026: Peptides &amp; Complex Generics Symposium</h3>
+      <div class="block"><span class="mono">The project</span>
+        <p>PCG 2026 brought together pharmaceutical industry leaders, regulatory experts, academicians, and technology specialists to examine the evolving landscape of peptides and complex generics. The programme needed to connect emerging science, manufacturing realities, regulatory considerations, and industry priorities in a coherent, industry-focused forum.</p>
+      </div>
+      <div class="block"><span class="mono">My contribution</span>
+        <p>I played a key role in conceptualising the symposium and translating its scientific and strategic priorities into a structured programme. My work spanned agenda development, senior speaker engagement, technical content preparation, stakeholder communications, and coordination of programme delivery.</p>
+        <ul class="contrib">
+          <li><strong>Scientific programme strategy:</strong> Helped shape the scientific vision and thematic framework, connecting emerging scientific developments, technological advances, and industry priorities.</li>
+          <li><strong>Agenda and session design:</strong> Led the development of plenary sessions, technical panels, leadership roundtables, and focused workshops across peptide therapeutics, oligonucleotides, complex generics, bioanalytical characterisation, formulation, drug delivery, and pharmaceutical manufacturing.</li>
+          <li><strong>Speaker and stakeholder engagement:</strong> Managed identification, outreach, invitations, confirmations, follow-ups, and coordination with industry executives, regulatory representatives, academics, and international experts.</li>
+          <li><strong>Technical content development:</strong> Prepared session briefs, moderator notes, discussion prompts, thematic frameworks, and speaker background documents to clarify session objectives and support substantive discussion.</li>
+          <li><strong>Programme execution:</strong> Aligned speaker requirements, session schedules, stakeholder communications, and logistical needs across teams.</li>
+        </ul>
+      </div>
+      <div class="block"><span class="mono">Impact and outputs</span>
+        <p>Helped create a structured forum for cross-sector discussion on the scientific, regulatory, and manufacturing challenges shaping the peptides and complex generics ecosystem. The programme connected multiple stakeholder groups through curated sessions and focused discussions. Post-conference, I am contributing to technical whitepapers that synthesise expert deliberations and translate session insights into longer-form knowledge resources.</p>
+        <span class="mono outputs-label">Key outputs</span>
+        <div class="outputs"><span class="pill">Scientific agenda</span><span class="pill">Session briefs and moderator notes</span><span class="pill">Speaker and stakeholder communications</span><span class="pill">Technical whitepapers in development</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="workshop" aria-label="Training workshop case study">
+  <div class="wrap">
+    <div class="aside">
+      <div class="bignum" aria-hidden="true">02</div>
+      <p class="when">2–5 June 2026</p>
+      <p class="where">ICT Mumbai</p>
+      <div class="art"><svg data-art="spheroid" role="img" aria-label="Cluster of cells forming a spheroid"></svg></div>
+    </div>
+    <div>
+      <p class="mono">Case study</p>
+      <h3>Hands-on Training Workshop on Alternatives to Animal Models (3D Cell Culture)</h3>
+      <div class="block"><span class="mono">The project</span>
+        <p>A four-day hands-on technical training programme designed to provide academic and industry participants with practical exposure to emerging alternatives to animal models, including 3D cell culture, 3D bioprinting, and organ-on-chip technologies.</p>
+      </div>
+      <div class="block"><span class="mono">My contribution</span>
+        <p>I led the planning, coordination, and execution of the programme, shaping a learning experience that combined scientific context with practical exposure.</p>
+        <ul class="contrib">
+          <li><strong>Programme design:</strong> Developed the four-day structure around key advanced in-vitro technologies and their relevance to New Approach Methodologies (NAMs).</li>
+          <li><strong>Learning flow and content:</strong> Integrated expert-led lectures, technical demonstrations, and practical sessions to connect foundational concepts with hands-on learning.</li>
+          <li><strong>Faculty and technical coordination:</strong> Coordinated expert engagement, session schedules, training requirements, and access to relevant technologies, equipment, and technical expertise.</li>
+          <li><strong>Participant coordination:</strong> Managed registration-related communications, participant queries, and coordination with academic and industry attendees.</li>
+          <li><strong>On-ground delivery:</strong> Led coordination across all four days, overseeing faculty requirements, session transitions, practical activities, and participant engagement.</li>
+        </ul>
+      </div>
+      <div class="block"><span class="mono">Impact and outputs</span>
+        <p>Delivered a structured four-day learning programme that brought together expert instruction, technical demonstrations, and practical training. The workshop supported scientific outreach and capability-building in advanced in-vitro models, helping participants engage with approaches being explored as alternatives to conventional animal-based research.</p>
+        <span class="mono outputs-label">Key outputs</span>
+        <div class="outputs"><span class="pill">Four-day training programme</span><span class="pill">Structured lecture and practical-session flow</span><span class="pill">Faculty and participant coordination</span><span class="pill">Hands-on training delivery</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="conference" aria-label="3DCC x Biologics case study">
+  <div class="wrap">
+    <div class="aside">
+      <div class="bignum" aria-hidden="true">03</div>
+      <p class="when">21–23 January 2026</p>
+      <p class="where">Novotel, Goa, India</p>
+      <div class="art"><svg data-art="grid" role="img" aria-label="Four tracks across five halls"></svg></div>
+    </div>
+    <div>
+      <p class="mono">Case study · Organising Committee, Scientific Programmes &amp; Communications</p>
+      <h3>3DCC × Biologics 2026 Conference</h3>
+      <div class="block"><span class="mono">The project</span>
+        <p>A multidisciplinary conference exploring advances at the intersection of 3D cell culture, biologics, and emerging biotechnology platforms. The programme required coordination across multiple scientific tracks, speakers, poster reviewers, and conference spaces.</p>
+      </div>
+      <div class="block"><span class="mono">My contribution</span>
+        <p>As part of the organising committee, I contributed to scientific programme development, speaker coordination, research poster evaluation, communications, and conference delivery.</p>
+        <ul class="contrib">
+          <li><strong>Programme coordination:</strong> Contributed to developing and refining the scientific agenda across thematic tracks and parallel sessions.</li>
+          <li><strong>Speaker engagement:</strong> Managed outreach, invitations, confirmations, follow-ups, and coordination with national and international subject matter experts.</li>
+          <li><strong>Abstract screening and evaluation:</strong> Coordinated review of research poster abstracts for scientific relevance and alignment with conference themes.</li>
+          <li><strong>Poster jury coordination:</strong> Led poster evaluation activities, coordinating jury members, co-chairs, and reviewers; managing poster allocations; and facilitating evaluation for Best Poster Awards.</li>
+          <li><strong>Multi-track delivery:</strong> Coordinated programme requirements across four parallel scientific tracks and five conference halls, working with speakers, moderators, jury members, and organising teams.</li>
+          <li><strong>Scientific communications and operations:</strong> Supported session content, speaker information, website and programme materials, announcements, poster presentations, and on-ground coordination.</li>
+        </ul>
+      </div>
+      <div class="block"><span class="mono">Impact and outputs</span>
+        <p>Supported the delivery of a complex, multi-track scientific conference by coordinating programme requirements across four parallel tracks and five conference halls. The work also helped establish a structured process for poster abstract review and Best Poster Award evaluation, alongside speaker communications and scientific outreach.</p>
+        <span class="mono outputs-label">Key outputs</span>
+        <div class="outputs"><span class="pill">Multi-track scientific programme</span><span class="pill">Speaker and conference communications</span><span class="pill">Abstract-review coordination</span><span class="pill">Poster jury and award evaluation process</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="writing" id="writing">
+  <div class="wrap">
+    <p class="mono">Writing &amp; publication</p>
+    <h2>Blogs, whitepapers, reports and personal writing.</h2>
+    <p class="intro">Each entry gets a snapshot, a short summary and a link.</p>
+    <div class="wgrid">
+
+      <div class="wcat"><h3>Blogs</h3>
+        <div class="entry empty"><div class="snap"><span class="mono">Snapshot</span></div><span class="tbd">Entry to be added</span></div>
+      </div>
+
+      <div class="wcat"><h3>Whitepapers</h3>
+        <div class="entry"><div class="snap"><span class="mono">Whitepaper</span></div>
+          <h4>PCG 2026 technical whitepaper series</h4>
+          <p class="src">Mumbai Biocluster, ICT Mumbai · In development</p>
+          <p class="sum">Technical whitepapers that synthesise expert deliberations, scientific insights and industry perspectives from key PCG 2026 sessions into structured knowledge resources on emerging technologies, manufacturing challenges and regulatory developments.</p>
+          <span class="tbd">Link to be added</span></div>
+      </div>
+
+      <div class="wcat"><h3>Reports</h3>
+        <div class="entry empty"><div class="snap"><span class="mono">Snapshot</span></div><span class="tbd">Entry to be added</span></div>
+      </div>
+
+      <div class="wcat"><h3>Personal</h3>
+        <div class="entry"><div class="snap"><span class="mono">Publication</span></div>
+          <h4>"A Beacon of Light"</h4>
+          <p class="src">Rhizomatic Revolution Review, Issue 2</p>
+          <span class="tbd">Link to be added</span></div>
+        <div class="entry"><div class="snap"><span class="mono">Writing</span></div>
+          <h4>The Writer's Cosmos</h4>
+          <p class="src">Content writing and creation</p>
+          <span class="tbd">Link to be added</span></div>
+      </div>
 
     </div>
   </div>
@@ -340,6 +512,7 @@ p { margin: 0; }
         <p class="mono">04/2025 – Present · Mumbai</p>
         <h3>Program &amp; Outreach Lead</h3>
         <p class="org">Mumbai Biocluster, ICT Mumbai</p>
+        <p class="mono focusline">Scientific Programme Development | Industry Engagement | Conference &amp; Workshop Management</p>
         <ul>
           <li>Leads end-to-end delivery of scientific programmes, conferences and ecosystem initiatives across multiple stakeholders and workstreams.</li>
           <li>Curates agendas and session narratives through research, speaker alignment and thematic positioning.</li>
@@ -405,7 +578,7 @@ p { margin: 0; }
 
 <section class="edu" id="education">
   <div class="wrap">
-    <p class="mono">Education &amp; writing</p>
+    <p class="mono">Education &amp; presentations</p>
     <h2>Where the science and the words come from.</h2>
     <div class="cols">
       <div>
@@ -414,9 +587,7 @@ p { margin: 0; }
         <div class="row"><b>B.Sc. Biotechnology</b><span>K J Somaiya College of Science and Commerce, Mumbai · 2020</span><br><span class="score">CGPA 7.85 / 10</span></div>
       </div>
       <div>
-        <h3>Publications &amp; presentations</h3>
-        <div class="row"><b>"A Beacon of Light"</b><span>Rhizomatic Revolution Review, Issue 2</span></div>
-        <div class="row"><b>The Writer's Cosmos</b><span>Content writing and creation</span></div>
+        <h3>Presentations</h3>
         <div class="row"><b>Poster presentation</b><span>National Webinar, "Recent trends in Algae and their utility of pharmaceutics", Shiksha 'O' Anusandhan University, Odisha</span></div>
       </div>
     </div>
@@ -427,18 +598,20 @@ p { margin: 0; }
   <svg class="orbit" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 5"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="50" cy="4" r="3" fill="currentColor"/><circle cx="80" cy="50" r="3" fill="currentColor"/></svg>
   <div class="wrap">
     <p class="mono">Contact</p>
-    <h2>Let's plan the next programme.</h2>
+    <h2>Let's make science matter.</h2>
+    <p class="open">Open to collaborations in science communication, scientific publishing, programme development, and industry–academia engagement.</p>
     <div class="details">
-      <div class="detail"><span>Email</span><span class="val" id="v-email">arpibhavsar12@gmail.com</span><button class="copy" type="button" data-target="v-email">Copy</button></div>
+      <div class="detail"><span>Email</span><span class="val"><a id="v-email" href="mailto:arpibhavsar12@gmail.com">arpibhavsar12@gmail.com</a></span><button class="copy" type="button" data-target="v-email">Copy</button></div>
       <div class="detail"><span>Phone</span><span class="val" id="v-phone">9653397225</span><button class="copy" type="button" data-target="v-phone">Copy</button></div>
       <div class="detail"><span>LinkedIn</span><span class="val"><a href="https://linkedin.com/in/arpi-bhavsar-64a8b1212" target="_blank" rel="noopener">linkedin.com/in/arpi-bhavsar-64a8b1212</a></span></div>
+      <div class="detail"><span>CV</span><span class="val"><a href="Arpi_Bhavsar_CV.pdf" target="_blank" rel="noopener">Download CV</a></span></div>
       <div class="detail"><span>Based in</span><span class="val">Navi Mumbai, Maharashtra</span></div>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="wrap foot"><span>Arpi Bhavsar · Programme &amp; Outreach Lead</span><span>Mumbai Biocluster, ICT Mumbai</span></footer>
+<footer class="wrap foot"><span>Arpi Bhavsar · Scientific Programs, Communications &amp; Outreach Lead</span><span>Mumbai Biocluster, ICT Mumbai</span></footer>
 <div class="ring" id="ring" aria-hidden="true"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -520,10 +693,8 @@ p { margin: 0; }
   if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { netOn = en[0].isIntersecting; }, { threshold: 0 }).observe(cv.parentElement);
 
   /* ---------- rotating helix (svg) ---------- */
-  var hx = $("#helix"), N = 22, rungs = [], A = [], B = [], phase = 0;
-  for (var i = 0; i < N; i++) {
-    rungs.push(el("line", { "stroke-width": 2, style: "stroke:var(--line)" }, hx));
-  }
+  var hx = $("#helix"), N = 22, rungs = [], A = [], B = [], phase = 0, i;
+  for (i = 0; i < N; i++) rungs.push(el("line", { "stroke-width": 2, style: "stroke:var(--line)" }, hx));
   for (i = 0; i < N; i++) {
     A.push(el("circle", { style: "fill:var(--accent)" }, hx));
     B.push(el("circle", { style: "fill:var(--pop)" }, hx));
@@ -546,24 +717,22 @@ p { margin: 0; }
   }
   if (reduce) drawNet(false); else requestAnimationFrame(loop);
 
-  /* ---------- programme graphics ---------- */
-  (function peptide() {
-    var s = $('[data-art="peptide"]'); if (!s) return;
+  /* ---------- project graphics (each can appear more than once) ---------- */
+  var beads = [], spheroids = [], nodes = [];
+  $$('[data-art="peptide"]').forEach(function (s) {
     s.setAttribute("viewBox", "0 0 320 240");
-    var n = 13, p = [], i;
-    for (i = 0; i < n; i++) p.push([24 + i * (272 / (n - 1)), 120 + Math.sin(i * .9) * 56]);
-    el("path", { d: p.map(function (q, k) { return (k ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" "), fill: "none", "stroke-width": 3, "stroke-linecap": "round", "stroke-linejoin": "round", style: "stroke:var(--line)" }, s);
-    window.__beads = [];
-    for (i = 0; i < n; i++) {
-      var g = el("g", {}, s), up = i % 2 === 0, sx = p[i][0] + (up ? -6 : 6), sy = p[i][1] + (up ? -34 : 34);
-      el("line", { x1: p[i][0], y1: p[i][1], x2: sx, y2: sy, "stroke-width": 2, style: "stroke:var(--muted)" }, g);
+    var n = 13, p = [], k;
+    for (k = 0; k < n; k++) p.push([24 + k * (272 / (n - 1)), 120 + Math.sin(k * .9) * 56]);
+    el("path", { d: p.map(function (q, m) { return (m ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" "), fill: "none", "stroke-width": 3, "stroke-linecap": "round", "stroke-linejoin": "round", style: "stroke:var(--line)" }, s);
+    for (k = 0; k < n; k++) {
+      var g = el("g", {}, s), up = k % 2 === 0, sx = p[k][0] + (up ? -6 : 6), sy = p[k][1] + (up ? -34 : 34);
+      el("line", { x1: p[k][0], y1: p[k][1], x2: sx, y2: sy, "stroke-width": 2, style: "stroke:var(--muted)" }, g);
       el("circle", { cx: sx, cy: sy, r: 6, style: "fill:var(--muted)", opacity: .8 }, g);
-      el("circle", { cx: p[i][0], cy: p[i][1], r: 10, style: "fill:" + (i % 5 === 2 ? "var(--pop)" : "var(--accent)") }, g);
-      window.__beads.push(g);
+      el("circle", { cx: p[k][0], cy: p[k][1], r: 10, style: "fill:" + (k % 5 === 2 ? "var(--pop)" : "var(--accent)") }, g);
+      beads.push({ g: g, k: k });
     }
-  })();
-  (function spheroid() {
-    var s = $('[data-art="spheroid"]'); if (!s) return;
+  });
+  $$('[data-art="spheroid"]').forEach(function (s) {
     s.setAttribute("viewBox", "0 0 320 240");
     el("circle", { cx: 160, cy: 120, r: 104, fill: "none", "stroke-width": 1.5, "stroke-dasharray": "3 6", style: "stroke:var(--muted)" }, s);
     var g = el("g", {}, s), step = 27, r, c;
@@ -571,17 +740,15 @@ p { margin: 0; }
       var x = 160 + c * step + (r % 2 ? step / 2 : 0) + ((c * 7 + r * 3) % 5 - 2), y = 120 + r * step * .87 + ((c * 5 + r * 11) % 5 - 2);
       var d = Math.sqrt((x - 160) * (x - 160) + (y - 120) * (y - 120));
       if (d < 88) {
-        el("circle", { cx: x, cy: y, r: 12.5, style: "fill:var(--accent);stroke:var(--accent)", "fill-opacity": (.14 + ((c * 3 + r * 5) % 4) * .1).toFixed(2), "stroke-width": 1.5 }, g);
-        el("circle", { cx: x + 1, cy: y + 1, r: 3.6, style: "fill:" + (((c + r) % 4 === 0) ? "var(--pop)" : "var(--fg)") }, g);
+        el("circle", { cx: x, cy: y, r: 12.5, style: "fill:var(--accent);stroke:var(--accent)", "fill-opacity": (.14 + ((c * 3 + r * 5 + 40) % 4) * .1).toFixed(2), "stroke-width": 1.5 }, g);
+        el("circle", { cx: x + 1, cy: y + 1, r: 3.6, style: "fill:" + (((c + r + 20) % 4 === 0) ? "var(--pop)" : "var(--fg)") }, g);
       }
     }
-    window.__spheroid = g;
-  })();
-  (function grid() {
-    var s = $('[data-art="grid"]'); if (!s) return;
+    spheroids.push(g);
+  });
+  $$('[data-art="grid"]').forEach(function (s) {
     s.setAttribute("viewBox", "0 0 320 240");
     var rows = 4, cols = 5, x0 = 64, dx = 58, y0 = 46, dy = 50, r, c;
-    window.__nodes = [];
     for (c = 0; c < cols; c++) el("text", { x: x0 + c * dx, y: 18, "text-anchor": "middle", "font-size": 11, style: "fill:var(--muted);font-family:var(--mono)" }, s).textContent = "H" + (c + 1);
     for (r = 0; r < rows; r++) {
       el("text", { x: 16, y: y0 + r * dy + 4, "font-size": 11, style: "fill:var(--muted);font-family:var(--mono)" }, s).textContent = "T" + (r + 1);
@@ -589,9 +756,9 @@ p { margin: 0; }
     }
     for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) {
       var hot = (r * 3 + c * 2) % 5 === 0;
-      window.__nodes.push(el("circle", { cx: x0 + c * dx, cy: y0 + r * dy, r: hot ? 10 : 7, style: "fill:" + (hot ? "var(--pop)" : "var(--accent)") }, s));
+      nodes.push(el("circle", { cx: x0 + c * dx, cy: y0 + r * dy, r: hot ? 10 : 7, style: "fill:" + (hot ? "var(--pop)" : "var(--accent)") }, s));
     }
-  })();
+  });
 
   /* ---------- copy buttons ---------- */
   $$(".copy").forEach(function (btn) {
@@ -609,7 +776,7 @@ p { margin: 0; }
   gsap.defaults({ ease: "power3.out" });
 
   gsap.from(".hero .wi", { yPercent: 115, duration: 1.1, ease: "power4.out", stagger: .13, delay: .1 });
-  gsap.from(".hero .mono, .hero .lead, .hero .actions, .scroll-cue", { y: 24, opacity: 0, duration: .9, stagger: .1, delay: .5 });
+  gsap.from(".hero .mono, .hero .role-sub, .hero .lead, .hero .actions .btn, .scroll-cue", { y: 24, opacity: 0, duration: .9, stagger: .08, delay: .5 });
   gsap.from(".helix-box", { opacity: 0, scale: .9, duration: 1.4, delay: .3 });
 
   gsap.to("#progress", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .2 } });
@@ -625,10 +792,11 @@ p { margin: 0; }
   gsap.fromTo("#mqb", { xPercent: -22 }, { xPercent: 0, ease: "none", scrollTrigger: { trigger: ".marquee", start: "top bottom", end: "bottom top", scrub: .6 } });
 
   /* about: reveal word by word */
-  var rv = $("#reveal");
-  rv.innerHTML = rv.textContent.trim().split(/\s+/).map(function (w) { return '<span class="rw">' + w + "</span>"; }).join(" ");
-  gsap.fromTo(".rw", { opacity: .22 }, { opacity: 1, stagger: .08, ease: "none", scrollTrigger: { trigger: rv, start: "top 82%", end: "bottom 55%", scrub: .5 } });
-  gsap.from(".about .facts .pill", { y: 18, opacity: 0, stagger: .08, duration: .6, scrollTrigger: { trigger: ".about .facts", start: "top 90%", once: true } });
+  $$(".reveal").forEach(function (rv) {
+    rv.innerHTML = rv.textContent.trim().split(/\s+/).map(function (w) { return '<span class="rw">' + w + "</span>"; }).join(" ");
+    gsap.fromTo($$(".rw", rv), { opacity: .22 }, { opacity: 1, stagger: .08, ease: "none", scrollTrigger: { trigger: rv, start: "top 82%", end: "bottom 55%", scrub: .5 } });
+  });
+  gsap.from(".about .facts .pill", { y: 18, opacity: 0, stagger: .08, duration: .6, scrollTrigger: { trigger: ".about .facts", start: "top 92%", once: true } });
 
   /* numbers: slide in and count up */
   $$(".stat").forEach(function (row) {
@@ -642,13 +810,10 @@ p { margin: 0; }
     } });
   });
 
-  /* programme graphics motion */
-  if (window.__beads) window.__beads.forEach(function (g, i) { gsap.to(g, { y: i % 2 ? 7 : -7, duration: 1.5 + (i % 4) * .2, yoyo: true, repeat: -1, ease: "sine.inOut", delay: i * .07 }); });
-  if (window.__spheroid) gsap.to(window.__spheroid, { scale: 1.035, svgOrigin: "160 120", duration: 2.2, yoyo: true, repeat: -1, ease: "sine.inOut" });
-  if (window.__nodes) {
-    var tl = gsap.timeline({ repeat: -1, repeatDelay: .6 });
-    tl.to(window.__nodes, { attr: { r: 11 }, duration: .35, stagger: { each: .06, from: "start" }, yoyo: true, repeat: 1, ease: "sine.inOut" });
-  }
+  /* graphics motion */
+  beads.forEach(function (b) { gsap.to(b.g, { y: b.k % 2 ? 7 : -7, duration: 1.5 + (b.k % 4) * .2, yoyo: true, repeat: -1, ease: "sine.inOut", delay: b.k * .07 }); });
+  spheroids.forEach(function (g) { gsap.to(g, { scale: 1.035, svgOrigin: "160 120", duration: 2.2, yoyo: true, repeat: -1, ease: "sine.inOut" }); });
+  if (nodes.length) gsap.timeline({ repeat: -1, repeatDelay: .6 }).to(nodes, { attr: { r: 11 }, duration: .35, stagger: { each: .03, from: "start" }, yoyo: true, repeat: 1, ease: "sine.inOut" });
 
   /* pinned horizontal run on wide screens, stacked cards otherwise */
   var mm = gsap.matchMedia();
@@ -666,6 +831,21 @@ p { margin: 0; }
     });
   });
 
+  /* case studies */
+  $$(".case").forEach(function (c) {
+    var num = $(".bignum", c);
+    gsap.from(num, { yPercent: 40, opacity: 0, duration: 1, scrollTrigger: { trigger: c, start: "top 80%", once: true } });
+    gsap.to(num, { y: -50, ease: "none", scrollTrigger: { trigger: c, start: "top bottom", end: "bottom top", scrub: true } });
+    $$(".block", c).forEach(function (b) {
+      gsap.from(b, { y: 36, opacity: 0, duration: .8, scrollTrigger: { trigger: b, start: "top 92%", once: true } });
+    });
+    gsap.from($$(".contrib li", c), { x: -22, opacity: 0, stagger: .09, duration: .6, scrollTrigger: { trigger: $(".contrib", c), start: "top 90%", once: true } });
+    gsap.from($$(".outputs .pill", c), { y: 16, opacity: 0, stagger: .07, duration: .5, scrollTrigger: { trigger: $(".outputs", c), start: "top 95%", once: true } });
+  });
+
+  /* writing */
+  gsap.from(".wcat", { y: 50, opacity: 0, stagger: .12, duration: .8, scrollTrigger: { trigger: ".wgrid", start: "top 88%", once: true } });
+
   /* timeline */
   gsap.fromTo("#tlfill", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: "#timeline", start: "top 65%", end: "bottom 65%", scrub: true } });
   $$(".tl").forEach(function (t) {
@@ -674,7 +854,7 @@ p { margin: 0; }
   });
   $$(".tl")[0].classList.add("on");
 
-  /* skills */
+  /* skills and education */
   $$(".group").forEach(function (g) {
     gsap.from($$(".chip", g), { y: 22, opacity: 0, duration: .55, stagger: .04, scrollTrigger: { trigger: g, start: "top 90%", once: true } });
     gsap.from($("h3", g), { x: -24, opacity: 0, duration: .7, scrollTrigger: { trigger: g, start: "top 92%", once: true } });
@@ -682,7 +862,7 @@ p { margin: 0; }
   gsap.from(".edu .row", { y: 30, opacity: 0, stagger: .1, duration: .7, scrollTrigger: { trigger: ".edu .cols", start: "top 85%", once: true } });
 
   /* contact */
-  gsap.from(".contact h2", { y: 60, opacity: 0, duration: 1, scrollTrigger: { trigger: ".contact", start: "top 70%", once: true } });
+  gsap.from(".contact h2, .contact .open", { y: 60, opacity: 0, stagger: .12, duration: 1, scrollTrigger: { trigger: ".contact", start: "top 70%", once: true } });
   gsap.from(".detail", { y: 24, opacity: 0, stagger: .1, duration: .7, scrollTrigger: { trigger: ".details", start: "top 90%", once: true } });
   gsap.to(".orbit", { rotate: 360, ease: "none", scrollTrigger: { trigger: ".contact", start: "top bottom", end: "bottom top", scrub: true } });
 
